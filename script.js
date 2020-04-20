@@ -9,32 +9,33 @@
 //If the user provides an answer which isn 't a number, print an error message and do not count this as a try.
 
 let prompt = require("prompt-sync")();
-let count = 0;
 let guesses = [];
-let j = "a";
+let j = "b";
 // code below (replace this example)
 
   let answer = prompt("Guess a number between 1 and 10: ");
-  let randomNumber = Math.floor(Math.random() * 10);
+  let randomNumber = Math.floor(Math.random() * 10 + 1);
+  
   for (let i = 0; i !== j; i++) {
-     if (guesses.includes(answer)) {
-       console.log("Guess again!");
+     if ( guesses.includes(answer) ) {
+       console.log("Guess again - you've already guess that number!");
        answer = prompt("> ");
-      } else if (isNaN(answer)) {
+      } else if ( isNaN(answer) ) {
         console.log("Sorry, your entry is not a number! Guess again");
-        prompt("> ");
-      } else if( answer > randomNumber ) {
-        count++;
+        answer = prompt("> ");
+      } else if ( answer > randomNumber ) {
         guesses.push(answer);
         console.log("Sorry, try a smaller number!")
         answer = prompt("> ");
       } else if ( answer < randomNumber ) {
-        count++;
         guesses.push(answer);
         console.log("Sorry, try a bigger number!")
         answer = prompt("> ");
-      } else if (answer === randomNumber) {
-        count++;
-        console.log("Correct! Number of attempts: " + count);
+      } else if (answer == randomNumber) {
+          if (guesses.length > 1) {
+            console.log("You got it! You took " + guesses.length + " attempts!");
+          } else {
+            console.log("You got it on the first attempt!");
+          }  
       }
     }
