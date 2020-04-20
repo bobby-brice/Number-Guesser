@@ -10,15 +10,31 @@
 
 let prompt = require("prompt-sync")();
 let count = 0;
-
+let guesses = [];
+let j = "a";
 // code below (replace this example)
-let answer = prompt("Guess a number between 1 and 20: ");
 
-
-
-console.log("You answered: " + answer);
-
-function getRandomNumber () {
-  return Math.floor(Math.random() * 20);
-}
-getRandomNumber();
+  let answer = prompt("Guess a number between 1 and 10: ");
+  let randomNumber = Math.floor(Math.random() * 10);
+  for (let i = 0; i !== j; i++) {
+     if (guesses.includes(answer)) {
+       console.log("Guess again!");
+       answer = prompt("> ");
+      } else if (isNaN(answer)) {
+        console.log("Sorry, your entry is not a number! Guess again");
+        prompt("> ");
+      } else if( answer > randomNumber ) {
+        count++;
+        guesses.push(answer);
+        console.log("Sorry, try a smaller number!")
+        answer = prompt("> ");
+      } else if ( answer < randomNumber ) {
+        count++;
+        guesses.push(answer);
+        console.log("Sorry, try a bigger number!")
+        answer = prompt("> ");
+      } else if (answer === randomNumber) {
+        count++;
+        console.log("Correct! Number of attempts: " + count);
+      }
+    }
