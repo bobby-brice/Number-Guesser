@@ -1,22 +1,11 @@
-// Write a guessing game where the user has to guess a secret number.
-
-//After every guess the program tells the user whether their number was too large or too small.
-
-//At the end, the number of tries needed should be printed.
-
-// Inputting the same number multiple times should only count as one try.
-
-//If the user provides an answer which isn 't a number, print an error message and do not count this as a try.
-
 let prompt = require("prompt-sync")();
 let guesses = [];
-let j = "b";
-// code below (replace this example)
+let correctGuess = false;
 
-  let answer = prompt("Guess a number between 1 and 10: ");
-  let randomNumber = Math.floor(Math.random() * 10 + 1);
+let answer = prompt("Guess a number between 1 and 10: ");
+let randomNumber = Math.floor(Math.random() * 10 + 1);
   
-  for (let i = 0; i !== j; i++) {
+  while(!correctGuess) {
      if ( guesses.includes(answer) ) {
        console.log("Guess again - you've already guess that number!");
        answer = prompt("> ");
@@ -32,9 +21,11 @@ let j = "b";
         console.log("Sorry, try a bigger number!")
         answer = prompt("> ");
       } else if (answer == randomNumber) {
-          if (guesses.length > 1) {
+          if (guesses.length >= 1) {
+            correctGuess = true;
             console.log("You got it! You took " + guesses.length + " attempts!");
           } else {
+            correctGuess = true;
             console.log("You got it on the first attempt!");
           }  
       }
